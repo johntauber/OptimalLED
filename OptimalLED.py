@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from itertools import combinations
+import pickle
 
 empirical = pd.read_csv('empirical_intensity.csv', header=None)
 empirical = np.array(empirical)
@@ -73,3 +74,10 @@ for comb in combinations(x, 5):
         optimal_mean['array'] = summed
         optimal_mean['mean'] = summed.mean()
         optimal_mean['combination'] = comb
+
+
+with open('optimal_variance.pickle', 'wb') as handle:
+    pickle.dump(optimal_variance, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open('optimal_mean.pickle', 'wb') as handle:
+    pickle.dump(optimal_mean, handle, protocol=pickle.HIGHEST_PROTOCOL)
